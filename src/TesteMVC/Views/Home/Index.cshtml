@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div ng-controller="produtosCtrl">
+
+
+    <div class="jumbotron">
+
+        @*<input type="text" id="strJson" />*@
+        <h2>Cadastrar Produto</h2>
+
+        <div class="divEntrada">
+            <input type="text" id="id" ng-model="produto.Id" placeholder="Id" />
+            <input type="text" id="nome" ng-model="produto.Nome" placeholder="Nome" />
+            <input type="text" id="descricao" ng-model="produto.Descricao" placeholder="Descrição" />
+            <input type="text" id="fornecedora" ng-model="produto.Fornecedora" placeholder="Fornecedora" />
+            <input type="text" id="preco" ng-model="produto.Preco" placeholder="Preço" />
+
+            <button class="btn btn-primary" id="btnCadastrar" ng-click="Cadastrar(produto)">Cadastrar</button>
+        </div>
+
+        <div style="margin-top:25px;">
+            <table class="table table-striped" style="width:100%">
+                <tr>
+                    <th>Nome</th>
+                    <th>Fornecedora</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Remover</th>
+                </tr>
+                <tr ng-repeat="produto in produtos">
+                    <td>{{produto.nome}}</td>
+                    <td>{{produto.fornecedora}}</td>
+                    <td>{{produto.descricao}}</td>
+                    <td>{{produto.preco}}</td>
+                    <td><button class="btn btn-danger" >X</button></td>
+                </tr>
+            </table> 
+        </div>
+
+    </div>
+</div>
