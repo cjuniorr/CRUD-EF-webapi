@@ -2,6 +2,10 @@
 
 app.controller("produtosCtrl", function ($scope, $http) {
 
+    $('.money').mask('000.000.000.000.000,00', { reverse: true });
+
+    var url = 'http://localhost:51238/api/Produto/';
+
     $scope.produtos = [];
     $scope.NovoProduto = [];
 
@@ -28,42 +32,16 @@ app.controller("produtosCtrl", function ($scope, $http) {
 
     $scope.Cadastrar = function (model) {
         
+        var dado = angular.fromJson(model);
+
+        $scope.ValidarDados(dado);
+
         //$scope.NovoProduto = model;
         var strJson = JSON.stringify(model);
-
-        var url = 'http://localhost:51238/api/Produto/';
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: "http://localhost:51238/api/Produto/",
-        //    data: json,
-        //    dataType: 'application/json;odata=verbose'
-        //});
-
-        //$http({
-        //    method: 'POST',
-        //    url: 'http://localhost:51238/api/Produto/',
-        //}).then(function successCallback(response) {
-        //    console.log("POST ENVIADO COM SUCESSO");
-        //}, function errorCallback(response) {
-        //    console.log("POST FALHOU");
-        //});
-
-            // jQuery.ajax({
-            //    headers: {
-            //        'Accept': 'application/json',
-            //        'Content-Type': 'application/json'
-            //    },
-            //    'type': 'POST',
-            //    'url': url,
-            //    'data': JSON.stringify(model),
-            //    'dataType': 'json',
-            //    'success': callback
-            //});
-
+                
         $http({
             method: 'POST',
-            url: 'http://localhost:51238/api/Produto/',
+            url: url,
             data: strJson,
             headers: {
                 'Content-Type': 'application/json'
@@ -76,11 +54,38 @@ app.controller("produtosCtrl", function ($scope, $http) {
 
         $http({
             method: 'DELETE',
-            url: 'http://localhost:51238/api/Produto/',
+            url: url,
             data: strJson,
             headers: {
                 'Content-Type': 'application/json'
             }
         });
+    }
+
+    $scope.ValidarDados = function (dado) {
+
+        if ($scope.dado.produto.Id == '' || null) {
+            console.log("Id inválido!");
+        }
+        else if ($scope.dado.produto.Nome == '' || null) {
+            console.log("Nome inválido!!");
+        }
+        else if ($scope.dado.produto.Descricao == '' || null) {
+            console.log("Descrição inválida!");
+        }
+        else if ($scope.dado.produto.Fornecedora == '' || null) {
+            console.log("Fornecedora inválido!");
+        }
+        else if ($scope.dado.produto.Preco == '' || null) {
+            console.log("Preço inválido!");
+        }
+    }
+
+    $scope.LimparCampos = function () {
+        $('#nome').val('');
+        $('#descricao').val('');
+        $('#fornecedora').val('');
+        $('#preco').val('');
+        console.log("Campos limpos!");
     }
 });

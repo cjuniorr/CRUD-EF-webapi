@@ -2,43 +2,51 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <div ng-controller="produtosCtrl">
-
-
     <div class="jumbotron">
 
         @*<input type="text" id="strJson" />*@
-        <h2>Cadastrar Produto</h2>
+        @*<h2 style="text-align:center">Cadastro de produto</h2>*@
 
-        <div class="divEntrada">
-            <input type="text" id="id" ng-model="produto.Id" placeholder="Id" />
-            <input type="text" id="nome" ng-model="produto.Nome" placeholder="Nome" />
-            <input type="text" id="descricao" ng-model="produto.Descricao" placeholder="Descrição" />
-            <input type="text" id="fornecedora" ng-model="produto.Fornecedora" placeholder="Fornecedora" />
-            <input type="text" id="preco" ng-model="produto.Preco" placeholder="Preço" />
+        <div style="padding-left:0px" class="divEntrada">
+            @*<input type="text" id="id" ng-model="produto.Id" placeholder="Id" />*@
+            @*<div class="msgError"></div>*@
 
-            <button class="btn btn-primary" id="btnCadastrar" ng-click="Cadastrar(produto)">Cadastrar</button>
+            <input type="text" id="nome" ng-model="produto.Nome" maxlength="18" placeholder="Nome" />
+            @*<div class="msgError"></div>*@
+
+            <input type="text" id="descricao" ng-model="produto.Descricao" maxlength="18" placeholder="Descrição" />
+            @*<div class="msgError"></div>*@
+
+            <input type="text" id="fornecedora" ng-model="produto.Fornecedora" maxlength="18" placeholder="Fornecedora" />
+            @*<div class="msgError"></div>*@
+
+            <label></label> <input type="text" id="preco" class="money" ng-model="produto.Preco" maxlength="3" size="9" placeholder="R$"/>
+            @*<div class="msgError"></div>*@
+
+            <button style="margin-left: 172px;" class="btn btn-primary" id="btnCadastrar" ng-click="Cadastrar(produto)">Cadastrar</button>
+            <button style="margin-left:10px;" class="btn btn-warning" id="btnLimpar" ng-click="LimparCampos()">Limpar</button>
         </div>
 
         <div style="margin-top:25px;">
             <table class="table table-striped" style="width:100%">
                 <tr>
+                    <th>#</th>
                     <th>Nome</th>
                     <th>Fornecedora</th>
                     <th>Descrição</th>
                     <th>Preço</th>
-                    <th>Remover</th>
+                    <th></th>
                 </tr>
                 <tr ng-repeat="produto in produtos">
+                    <td>{{produto.id}}</td>
                     <td>{{produto.nome}}</td>
                     <td>{{produto.fornecedora}}</td>
                     <td>{{produto.descricao}}</td>
-                    <td>{{produto.preco}}</td>
-                    <td><button class="btn btn-danger" >X</button></td>
+                    <td class="money">R${{produto.preco}}</td>
+                    <td><button id="btnRemover" ng-click="RemoverProduto(produto)" class="btn btn-danger" >X</button></td>
                 </tr>
             </table> 
         </div>
-
     </div>
 </div>
